@@ -1,12 +1,17 @@
 package conta;
 
+import cliente.Cliente;
+
 public class Main {
 
 	public static void main(String[] args) {
-		Conta cc = new ContaCorrente();
-		Conta cp = new ContaPoupanca();
+		Cliente yunes = new Cliente();
+		yunes.setNome("Yunes da Silva Santos");
 		
-		Conta cc1 = new ContaCorrente();
+		Conta cc = new ContaCorrente(yunes);
+		Conta cp = new ContaPoupanca(yunes);
+		
+		//Conta cc1 = new ContaCorrente();
 		cc.depositar(100);
 		cc.imprimirExtrato();
 		cc.transferir(100, cp);

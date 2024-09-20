@@ -1,8 +1,11 @@
 package conta;
 
+import cliente.Cliente;
+
 public class ContaPoupanca extends Conta {
 
-	public ContaPoupanca() {
+	public ContaPoupanca(Cliente cliente) {
+		super(cliente);
 	}
 
 	@Override
