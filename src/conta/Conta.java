@@ -1,5 +1,8 @@
 package conta;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import cliente.Cliente;
 
 public abstract  class Conta implements IConta{
@@ -9,8 +12,16 @@ public abstract  class Conta implements IConta{
 	protected double saldo;
 	private static final int AGENCIA_PADRAO = 0001;
 	private static  int SEQUENCIAL = 1;
+	private static Map<Integer,Conta> contasCriadas = new HashMap<>();
 	protected Cliente cliente;
 	
+	
+	public Conta(Cliente cliente) {
+		this.agencia = AGENCIA_PADRAO;
+		this.numero = SEQUENCIAL++;
+		this.cliente = cliente;
+		contasCriadas.put(this.numero, this);
+	}
 	
 
 
@@ -29,11 +40,6 @@ public abstract  class Conta implements IConta{
 	}
 
 
-	public Conta(Cliente cliente) {
-		this.agencia = AGENCIA_PADRAO;
-		this.numero = SEQUENCIAL++;
-		this.cliente = cliente;
-	}
 
 	
 	public void depositar(double saldo) {
@@ -55,6 +61,13 @@ public abstract  class Conta implements IConta{
 		System.out.println(String.format("Agencia: %d", this.agencia));
 		System.out.println(String.format("Saldo: R$ %.2f", this.saldo));
 		System.out.println("---------------------------------------");
+	}
+	
+	public static Conta buscarConta(int numeroConta) {
+		return contasCriadas.get(numeroConta);
+	}
+	public static void listarContas() {
+		contasCriadas.forEach((num,conta) -> System.out.println("Conta: "+num+"\n Nome: "+conta.cliente.getNome()));
 	}
 	
 

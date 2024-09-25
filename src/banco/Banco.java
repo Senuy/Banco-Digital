@@ -1,21 +1,9 @@
 package banco;
-
-import java.util.List;
-
 import conta.Conta;
 
 public class Banco {
-	
-	public List<Conta> getContas() {
-		return contas;
-	}
-
-	public void setContas(List<Conta> contas) {
-		this.contas = contas;
-	}
-
 	private String nome;
-	private List <Conta> contas;
+	
 
 	public String getNome() {
 		return nome;
@@ -25,5 +13,19 @@ public class Banco {
 		this.nome = nome;
 	}
 	
+	public void buscarConta (int numeroConta) {
+		Conta conta = Conta.buscarConta(numeroConta);
+		if (conta != null) {
+			System.out.println("Conta: "+conta.getNumero());
+			conta.imprimirExtrato();
+		}else {
+			System.out.println("Conta não encontrada");
+		}
+	}
+	
+	public void listarTodasAsContas() {
+		System.out.println("Listando todas as contas do Banco: "+ this.nome);
+		Conta.listarContas();
+	}
 }
 
